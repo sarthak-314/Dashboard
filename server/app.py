@@ -1,7 +1,7 @@
 #!flask/bin/python
 from flask import Flask, jsonify, request 
 from flask_restful import Resource, Api 
-
+from flask_cors import CORS, cross_origin
 
 from get.code import get_code
 from get.sleep import get_sleep
@@ -10,6 +10,7 @@ from download.code import download_all_worksheets
 from download.smartwatch import download_smartwatch
 
 app = Flask(__name__) 
+CORS(app, support_credentials=True)
 api = Api(app) 
 
 class Code(Resource): 

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 // react plugin for creating charts
 import ChartistGraph from "react-chartist";
 // @material-ui/core
@@ -34,21 +34,77 @@ import CardHeader from "components/Card/CardHeader.js";
 import CardIcon from "components/Card/CardIcon.js";
 import CardBody from "components/Card/CardBody.js";
 import CardFooter from "components/Card/CardFooter.js";
+import axios from 'axios'
 
 import { bugs, website, server } from "variables/general.js";
 
 import {
   dailySalesChart,
   emailsSubscriptionChart,
-  completedTasksChart
+  sleepChart
 } from "variables/charts.js";
 
 import styles from "assets/jss/material-dashboard-react/views/dashboardStyle.js";
 
-const useStyles = makeStyles(styles);
+import { FLASK_SERVER } from '../../constants'
 
+const useStyles = makeStyles(styles);
 export default function Dashboard() {
   const classes = useStyles();
+
+  const [todayCode, setTodayCode] = useState(3)
+  const [percentCode, setPercentCode] = useState(34)
+  const [lastWeekCode, setLastWeekCode] = useState([4, 4, 4, 4, 4, 4, 4])
+
+  const [todaySleep, setTodaySleep] = useState(8)
+  const [percentSleep, setPercentSleep] = useState(-10)
+  const [lastWeekSleep, setLastWeekSleep] = useState([7.5, 8, 6, 5, 6.5, 7.6, 9])
+
+  useEffect(() => {
+    axios.get(FLASK_SERVER + 'code')
+    .then(res => {
+      const { percentage, today, week } = res.data
+      setTodayCode(today)
+      setPercentCode(percentage)
+      setLastWeekCode(week)
+    })
+    .catch(err => console.log(err))
+
+    axios.get(FLASK_SERVER + 'sleep')
+    .then(res => {
+      const {percentage, today, week } = res.data
+      if(today) {
+        setTodaySleep(today)
+      } else {
+        setTodaySleep(7.5)
+      }
+      setPercentSleep(percentage)
+      var sleepWeek = []
+      var i
+      for(i=0; i < week.length; i++){
+        console.log(i)
+        var x = week[i]
+        if(x){
+          sleepWeek.push(x)
+        } else {
+          sleepWeek.push(8)
+        }
+      }
+      setLastWeekSleep(sleepWeek)  
+    }).catch(err => console.log(err))
+  }, [])
+
+
+  const codeData =  {
+    labels: ["M", "T", "W", "T", "F", "S", "S"],
+    series: [lastWeekCode]
+  }
+
+  const sleepData = {
+    labels: ["M", "T", "W", "T", "F", "S", "S"],
+    series: [lastWeekSleep]
+  }
+
   return (
     <div>
       <GridContainer>
@@ -59,7 +115,7 @@ export default function Dashboard() {
               <DeveloperModeIcon/>
               </CardIcon>
               <p className={classes.cardCategory}>Time Spent Coding</p>
-              <h3 className={classes.cardTitle}>6 / 10</h3>
+              <h3 className={classes.cardTitle}>{todayCode} / 10 hrs</h3>
             </CardHeader>
             <CardFooter stats>
               <div className={classes.stats}>
@@ -81,7 +137,7 @@ export default function Dashboard() {
             <CardFooter stats>
               <div className={classes.stats}>
                 <CodeIcon/>
-                Time predicted by algorithm and shit
+                As predicted by the ML model
               </div>
             </CardFooter>
           </Card>
@@ -95,7 +151,7 @@ export default function Dashboard() {
                 <AirlineSeatIndividualSuiteIcon/>
               </CardIcon>
               <p className={classes.cardCategory}>Sleep Last Night</p>
-              <h3 className={classes.cardTitle}>75</h3>
+  <h3 className={classes.cardTitle}>{todaySleep} hrs</h3>
             </CardHeader>
             <CardFooter stats>
               <div className={classes.stats}>
@@ -113,7 +169,9 @@ export default function Dashboard() {
             <CardHeader color="success">
               <ChartistGraph
                 className="ct-chart"
-                data={dailySalesChart.data}
+
+                data={codeData}
+                
                 type="Line"
                 options={dailySalesChart.options}
                 listener={dailySalesChart.animation}
@@ -122,15 +180,34 @@ export default function Dashboard() {
             <CardBody>
               <h4 className={classes.cardTitle}>Time Spent Programming</h4>
               <p className={classes.cardCategory}>
+                {percentCode > 0 ?
+                <div>
                 <span className={classes.successText}>
-                  <ArrowUpward className={classes.upArrowCardCategory} /> 55%
-                </span>{" "}
-                increase in time since last week.
+                <ArrowUpward className={classes.upArrowCardCategory} /> 
+                {percentCode}
+                %
+              
+              </span>{" "}
+              increase in time since last week.
+              </div>
+                
+                :
+                <div>
+                <span className={classes.dangerText}>
+                <ArrowDownward className={classes.upArrowCardCategory} /> 
+                {percentCode}
+                %
+              
+              </span>{" "}
+              decrease in time since last week.
+
+              </div>
+                }
               </p>
             </CardBody>
             <CardFooter chart>
               <div className={classes.stats}>
-                <AccessTime /> updated 4 minutes ago
+                <AccessTime /> updated xx minutes ago (add
               </div>
             </CardFooter>
           </Card>
@@ -154,7 +231,7 @@ export default function Dashboard() {
             </CardBody>
             <CardFooter chart>
               <div className={classes.stats}>
-                <AccessTime /> updated 4 days ago
+                <AccessTime /> updated xx days ago
               </div>
             </CardFooter>
           </Card>
@@ -165,9 +242,11 @@ export default function Dashboard() {
             <CardHeader color="danger">
               <ChartistGraph
                 className="ct-chart"
-                data={dailySalesChart.data}
+                
+                data={sleepData}
+
                 type="Line"
-                options={dailySalesChart.options}
+                options={sleepChart.options}
                 listener={dailySalesChart.animation}
               />
             </CardHeader>
@@ -182,7 +261,7 @@ export default function Dashboard() {
             </CardBody>
             <CardFooter chart>
               <div className={classes.stats}>
-                <AccessTime /> updated 4 minutes ago
+                <AccessTime /> updated xx minutes ago
               </div>
             </CardFooter>
           </Card>
@@ -192,7 +271,7 @@ export default function Dashboard() {
         
         </GridContainer>
       <GridContainer>
-        <GridItem xs={12} sm={12} md={6}>
+        <GridItem xs={12} sm={12} md={12}>
           <CustomTabs
             title="TODO:"
             headerColor="primary"
@@ -233,31 +312,7 @@ export default function Dashboard() {
             ]}
           />
         </GridItem>
-        <GridItem xs={12} sm={12} md={6}>
-          <Card>
-            <CardHeader color="warning">
-              <h4 className={classes.cardTitleWhite}>Last 5 Days</h4>
-              <p className={classes.cardCategoryWhite}>
-                Stats for the last 6 weeks
-              </p>
-            </CardHeader>
-            <CardBody>
-              <Table
-                tableHeaderColor="warning"
-                tableHead={["ID", "Name", "Salary", "Country"]}
-                tableData={[
-                  ["1", "Dakota Rice", "$36,738", "Niger"],
-                  ["2", "Minerva Hooper", "$23,789", "Curaçao"],
-                  ["3", "Sage Rodriguez", "$56,142", "Netherlands"],
-                  ["4", "Philip Chaney", "$38,735", "Korea, South"], 
-                  ["5", "Boista", "rpin", "litt"], 
-                  ["5", "Boista", "rpin", "litt"]
-                ]}
-              />
-            </CardBody>
-          </Card>
-        </GridItem>
-      </GridContainer>
+              </GridContainer>
     </div>
   );
 }

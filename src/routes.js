@@ -32,14 +32,6 @@ const dashboardRoutes = [
   },
   
   {
-    path: "/data-stuff",
-    name: "Raw Data",
-    rtlName: "قائمة الجدول",
-    icon: DataUsageIcon,
-    component: TableList,
-    layout: "/admin"
-  },
-  {
     path: "/notebooks",
     name: "Colab Notebooks",
     rtlName: "طباعة",
