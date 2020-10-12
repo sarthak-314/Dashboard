@@ -1,0 +1,5 @@
+{
+    "python.pythonPath": "c:\\Users\\sarth\\anaconda3\\envs\\myenv\\python.exe",
+    "python.linting.pylintEnabled": true,
+    "python.linting.enabled": true
+}
