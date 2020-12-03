@@ -3,25 +3,21 @@
 // #############################
 
 var bugs = [
-  'Sign contract for "What are conference organizers afraid of?"',
-  "Lines From Great Russian Literature? Or E-mails From My Boss?",
-  "Flooded: One year later, assessing what was lost and what was found when a ravaging rain swept through metro Detroit",
-  "Create 4 Invisible User Experiences you Never Knew About"
+  "Find that user authentiacation bug",
+  "Solve the UI bugs",
+  "Find a better way to automate data collection",  
 ];
 var website = [
-  "Start with the React Native code on the Airbnb project",
-  "Learn Tensorflow Lite and build the chatbot",
-  "Build the chrome extension",
-  "Complete the Amneity detector and the price predictor",     
-  "Deploy all the websites, apps and machine learning models",
-  "Polish the Online Book Store website along with the ML applications", 
+  "Polish the articles / websites and github repo", 
+  "Deploy all the websites / app and ML models",
+  "Deploy all the websites, apps and the machine learning models",
+  "Start some more epic projects"
 ];
 var server = [
-  "Solve Cracking the Coding Interview",
+  "Complete the Resume",
   "Start competitive coding",
-  'Complete at least 500 questions from Leetcode', 
-  'Solve Elements of Programming Interview - the python version', 
-  'Start SQL squeris and system design'
+  'Grind Leetcode Hard', 
+  'Start Learning System Design and ML Design'
 ];
 
 module.exports = {

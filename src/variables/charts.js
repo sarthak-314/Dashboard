@@ -127,7 +127,7 @@ const emailsSubscriptionChart = {
     labels: [
       "100 Days in Data",
       "Book Store",
-      "Airbnb",
+      "Other",
       "Leetcode"
     ],
     series: [[542, 443, 320, 780]]

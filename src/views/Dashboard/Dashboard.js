@@ -54,7 +54,7 @@ export default function Dashboard() {
 
   const [todayCode, setTodayCode] = useState(3)
   const [percentCode, setPercentCode] = useState(34)
-  const [lastWeekCode, setLastWeekCode] = useState([4, 4, 4, 4, 4, 4, 4])
+  const [lastWeekCode, setLastWeekCode] = useState([4, 5, 6, 4, 3, 5, 4])
 
   const [todaySleep, setTodaySleep] = useState(8)
   const [percentSleep, setPercentSleep] = useState(-10)
@@ -115,7 +115,7 @@ export default function Dashboard() {
               <DeveloperModeIcon/>
               </CardIcon>
               <p className={classes.cardCategory}>Time Spent Coding</p>
-              <h3 className={classes.cardTitle}>{todayCode} / 10 hrs</h3>
+              <h3 className={classes.cardTitle}>{todayCode} / 7 hrs</h3>
             </CardHeader>
             <CardFooter stats>
               <div className={classes.stats}>
@@ -132,7 +132,7 @@ export default function Dashboard() {
                 <AccessibilityNewIcon />
               </CardIcon>
               <p className={classes.cardCategory}>Predicted Target for Today</p>
-              <h3 className={classes.cardTitle}>10 hrs</h3>
+              <h3 className={classes.cardTitle}>7 hrs</h3>
             </CardHeader>
             <CardFooter stats>
               <div className={classes.stats}>
@@ -207,7 +207,7 @@ export default function Dashboard() {
             </CardBody>
             <CardFooter chart>
               <div className={classes.stats}>
-                <AccessTime /> updated xx minutes ago (add
+                <AccessTime /> updated xx minutes ago
               </div>
             </CardFooter>
           </Card>
@@ -282,7 +282,7 @@ export default function Dashboard() {
                 tabContent: (
                   <Tasks
                     checkedIndexes={[0]}
-                    tasksIndexes={[0, 1, 2, 3, 4, 5]}
+                    tasksIndexes={[0, 1, 2, 3]}
                     tasks={website}
                   />
                 )
@@ -292,8 +292,8 @@ export default function Dashboard() {
                 tabIcon: BugReport,
                 tabContent: (
                   <Tasks
-                    checkedIndexes={[0, 3]}
-                    tasksIndexes={[0, 1, 2, 3]}
+                    checkedIndexes={[0]}
+                    tasksIndexes={[0, 1, 2]}
                     tasks={bugs}
                   />
                 )
@@ -303,8 +303,8 @@ export default function Dashboard() {
                 tabIcon: ListIcon,
                 tabContent: (
                   <Tasks
-                    checkedIndexes={[1]}
-                    tasksIndexes={[0, 1, 2, 3, 4]}
+                    checkedIndexes={[2]}
+                    tasksIndexes={[0, 1, 2, 3]}
                     tasks={server}
                   />
                 )

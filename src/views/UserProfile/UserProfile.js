@@ -52,15 +52,14 @@ export default function UserProfile() {
               </a>
             </CardAvatar>
             <CardBody profile>
-              <h6 className={classes.cardCategory}>Software Engineer / Data Scientist</h6>
+              <h6 className={classes.cardCategory}>Software Engineer</h6>
               <h4 className={classes.cardTitle}>Sarthak Bhatt</h4>
               <p className={classes.description}>
-                Don{"'"}t be scared of the truth because we need to restart the
-                human foundation in truth And I love you like Kanye loves Kanye
-                Some filler stuff about how cool I am as a person......
-                boiboiboibroubfiuwrbfiwebfweyibfwyuibfibdyfvbeviwsBVDC
+                Hi, I am Sarthak Bhatt. I code.
+
               </p>
-              <Button color="primary" round>
+              <Button color="primary" round
+              href="https://www.linkedin.com/in/sarthak-code/" target="_blank">
                 Connect on LinkedIn
               </Button>
             </CardBody>

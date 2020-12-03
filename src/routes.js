@@ -39,14 +39,6 @@ const dashboardRoutes = [
     component: Typography,
     layout: "/admin"
   },
-  {
-    path: "/icons",
-    name: "Projects",
-    rtlName: "الرموز",
-    icon: BubbleChart,
-    component: Icons,
-    layout: "/admin"
-  },
 {
     path: "/user",
     name: "About Me",

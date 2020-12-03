@@ -32,10 +32,12 @@ export default function Sidebar(props) {
         var activePro = " ";
         var listItemClasses;
         if (prop.path === "/upgrade-to-pro") {
+          
           activePro = classes.activePro + " ";
           listItemClasses = classNames({
             [" " + classes[color]]: true
           });
+
         } else {
           listItemClasses = classNames({
             [" " + classes[color]]: activeRoute(prop.layout + prop.path)
@@ -83,7 +85,7 @@ export default function Sidebar(props) {
   var brand = (
     <div className={classes.logo}>
       <a
-        href="https://www.creative-tim.com?ref=mdr-sidebar"
+        href="https://sarthak-bhatt314.medium.com/100-days-in-data-d5a6813213a2"
         className={classNames(classes.logoLink, {
           [classes.logoLinkRTL]: props.rtlActive
         })}
